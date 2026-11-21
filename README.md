@@ -133,6 +133,22 @@ The Garden follows a few essential rules:
 
 Public repository content must use safe example data. Private journals, credentials, personal identifiers, protected character records, and unlicensed artwork do not belong here.
 
+## 🧰 Development Debug Menu & Production Cleanup
+
+The early Garden shell will have a **development-only Debug Menu** so we can test quickly without touching real progression or private records. This menu is **planned, not yet implemented**.
+
+- **Diagnostics:** current view and build identity, safe errors, status of optional integrations, and sanitized test results.
+- **Scene testing:** preview synthetic weather, time of day, cottage presets, navigation, character-presence fixtures, and Habit Pet states.
+- **Economy testing:** show **clearly labeled fictional** XP/Gald/inventory scenarios without awarding or spending any canonical currency.
+- **Developer shortcuts:** reset *only* local demo fixtures and copy a redacted reproduction summary for the Blocker Shelf. Do not reset live user data.
+- **No shortcuts around consent:** no debug login bypass, hidden admin account, hardcoded secrets, live reward injection, unrestricted database inspection, or real character-memory writes.
+
+**Not simply hidden:** Production builds must exclude the debug UI and its development-only code/fixtures/routes, and the server must independently reject development-only operations. Any diagnostic endpoint must be authenticated and disabled outside explicitly authorized environments. Do not rely on a hidden button, URL parameter, or client-side toggle as a security boundary.
+
+**Cleanup Log:** The existing [living worklog](https://docs.google.com/document/d/1-9pg1JGPBxH_ODVNq6eS3ba5D_fEgGx3GU9wEPpPC4g/edit) tracks every temporary debug aid, fixture, test endpoint, elevated permission, preview access, or feature flag added during development—its owner, location, removal plan, and verified disposition. This is distinct from the Blocker Shelf (unfinished work) and Idea Pinboard (later ideas).
+
+**Release gate:** No production release until each Cleanup Log entry is resolved or intentionally replaced with an explicitly reviewed, production-safe mechanism; the production artifact is inspected/tested for stray debug interfaces, test routes, demo records, exposed credentials, and excessive permissions. Removal and access revocation need evidence, not an assumption.
+
 ## 🛠 Development Status
 
 **Phase: Foundation / Pre-development**
