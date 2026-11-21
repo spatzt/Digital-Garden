@@ -147,6 +147,16 @@ This repository begins with documentation and will expand through small, testabl
 
 ## 📖 Development Philosophy
 
+### Working agreement — no wandering in the weeds
+
+**Build for usefulness, quality, and maintainability—not complexity for its own sake.** Choose the simplest effective method that meets our requirements, with tests and accessibility appropriate to the feature.
+
+- **One goal per work session.** Define a small, usable result and its verification before beginning.
+- **Two-pass roadblock rule.** Try the best-supported path once, then make one focused correction/retry based on what was learned. If the blocker remains after two meaningful passes, **stop, document it, and move to the next independent task**. Don't repeat identical attempts or quietly work around privacy/security gates. A known unsafe or unauthorized operation stops immediately; it does not need two tries.
+- **Blocker Shelf.** Record the stuck feature, *where it stopped*, evidence/results from each pass, known or suspected cause, exact next fix or missing decision, and its best environment (**personal PC / work PC / phone / external dependency / any**). Mark the resume condition and status; never treat a workaround or mock as a functioning integration.
+- **Idea Pinboard.** Capture off-scope inspirations in one or two lines, without interrupting the current milestone. After we have a working build, review the board together and choose what belongs in the **next** build. Nothing moves into scope merely because it was pinned.
+- **One living record.** The **[Digital Garden Living Development Worklog](https://docs.google.com/document/d/1-9pg1JGPBxH_ODVNq6eS3ba5D_fEgGx3GU9wEPpPC4g/edit)** holds the Blocker Shelf and Idea Pinboard alongside verified decisions and session checkpoints. Do not create competing tracking documents by default.
+
 One working piece at a time.
 
 We value useful experiences over elaborate unfinished systems, clear boundaries over accidental complexity, and preserved creative progress over unnecessary reinvention.
