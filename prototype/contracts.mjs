@@ -1,6 +1,6 @@
 /** @typedef {{date: string, mood: string, stamina: number, constitution: number, willpower: number, note: string}} JournalEntry */
 /** @typedef {{name: string, completed: number, total: number}} Quest */
-/** @typedef {{xp: number, nextLevelXp: number, gald: number}} Progression */
+/** @typedef {{level: number, xp: number, nextLevelXp: number, gald: number}} Progression */
 
 export function resolveRoute(hash) {
   const path = hash.replace(/^#\/?/, '').replace(/\/$/, '') || 'daily';

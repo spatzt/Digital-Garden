@@ -59,10 +59,10 @@ def run(browser, url, shots):
     expect(desktop.get_by_role("heading", name="November 2026")).to_be_visible()
 
     desktop.locator('a[href="#/check-in"]').first.click()
-    desktop.get_by_role("radio", name="Calm").check()
+    desktop.get_by_label("Mood", exact=True).fill("6")
     desktop.get_by_role("button", name="Save sample check-in").click()
     desktop.locator('a[href="#/daily"]').first.click()
-    expect(desktop.get_by_text("Sample check-in: Calm")).to_be_visible()
+    expect(desktop.locator(".gauge-strip")).to_contain_text("Mood6")
     expect(desktop.get_by_label("Custom reply")).to_have_value("Hello, Sol.")
     assert not errors, errors
 

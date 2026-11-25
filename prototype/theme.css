@@ -126,3 +126,85 @@ fieldset{border:1px solid var(--line);border-radius:8px;margin:0 0 10px}
  .scene-art{object-position:58% top}
  .dialogue{width:100%;margin-top:192px}
 }
+
+/* Shared sanctuary ornament and material treatment. */
+:root { --gilt:#8c603e; --gilt-light:#e8c48c; --paper-light:#fff3e0; --wood:#5e392e; }
+.masthead {
+  background:var(--plum);
+  border-bottom:3px double var(--gold);
+  box-shadow:0 4px 15px #24162870;
+}
+.brand { text-shadow:0 2px 3px #160f1e; }
+#header-progress { display:flex; align-items:center; gap:8px; font: .83rem var(--serif); margin-inline:auto; }
+#header-progress progress { width:clamp(48px,8vw,140px); }
+#header-progress strong { border:1px solid #aa8058; border-radius:100px; padding:6px 9px; color:var(--gold); white-space:nowrap; }
+.sidebar { border-inline-end:3px double var(--gold); }
+.sidebar a[aria-current=page] { box-shadow:inset 0 0 0 2px #ffdea2, inset 0 0 0 3px #9f703c; background:#e9c38a; }
+.sidebar a:hover:not([aria-current=page]) { background:var(--violet); }
+.avatar span { border:1px solid var(--gold); border-radius:50%; padding:4px 8px; }
+body[data-page="daily"] .shell {
+  background:linear-gradient(#30213b22,#30213b45),url('./assets/sanctuary.webp') center top/cover no-repeat,var(--plum);
+}
+body[data-page="daily"] .sidebar {
+  background:linear-gradient(180deg,#2e223de8 65%,#2e223d70),url('./assets/sanctuary.webp') left bottom/auto 100% no-repeat,var(--plum);
+}
+body[data-page="daily"] main { padding:clamp(12px,1.5vw,24px); }
+.daily-head>div { padding:4px 12px; background:#2e223deb; border:1px solid #b99166; border-radius:6px; }
+.daily-head h1 { font-size:clamp(1.6rem,3vw,2.5rem); }
+.daily-head>p { background:#2e223deb; border-radius:6px; padding:5px 9px; }
+.daily-head>div>.quiet { display:none; }
+.paper,.dialogue {
+  position:relative; border:4px double var(--gilt); border-radius:12px 5px 12px 5px;
+  background-color:var(--paper-light); box-shadow:0 4px 10px #39271664,inset 0 0 18px #c18c4938;
+}
+.paper::after,.dialogue::after {
+  content:""; position:absolute; inset:4px; pointer-events:none;
+  background:
+    radial-gradient(ellipse at 74% 36%,#78864c80 0 20%,transparent 23%) top right/28px 17px no-repeat,
+    radial-gradient(ellipse at 35% 34%,#ab875475 0 21%,transparent 24%) top right/21px 27px no-repeat,
+    radial-gradient(ellipse at 25% 67%,#78864c80 0 20%,transparent 23%) bottom left/28px 17px no-repeat,
+    radial-gradient(ellipse at 63% 72%,#ab875475 0 21%,transparent 24%) bottom left/18px 25px no-repeat;
+}
+.paper h2 { border-bottom:1px solid var(--line); padding:0 12px 8px 0; }
+.paper h2::before { content:'✧'; color:#8a633d; margin-right:7px; }
+.sanctuary { background-color:transparent; border:0; box-shadow:none; min-height:490px; }
+.scene-art { opacity:.12; }
+.sanctuary::before { background:linear-gradient(0deg,#2d1a25b0,transparent 50%); }
+.scene-heading { display:none; }
+.sol-sprite { left:-4%; bottom:0; width:68%; height:100%; }
+.dialogue { width:51%; padding:12px; margin-top:auto; border-radius:46px 32px 25px 32px; }
+.speaker { align-items:start; flex-direction:column; gap:0; }
+.speaker h2 { font-size:2.5rem; text-shadow:0 1px #fff4db; }
+.button,button { border-radius:100px; box-shadow:inset 0 0 0 2px #fff8e275; }
+.filled { background:#734838; border-color:#a2754b; box-shadow:inset 0 0 0 2px #e6bc7780; }
+.choices button::before { content:'✧'; margin-right:7px; color:#85582f; }
+progress { accent-color:#8a5734; }
+progress::-webkit-progress-bar { background:#d6ba9b; border-radius:12px; }
+progress::-webkit-progress-value { background:#ae7337; border-radius:12px; }
+.gauge-strip { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px 10px; margin:5px 0 9px; }
+.gauge-strip div { display:flex; justify-content:space-between; gap:4px; border-bottom:1px solid #dbc1a1; font-size:.78rem; }
+.gauge-strip dd { margin:0; font-weight:bold; }
+.gauge-fields { display:grid; grid-template-columns:repeat(auto-fit,minmax(105px,1fr)); gap:8px; }
+.gauge-fields input { display:block; width:100%; min-height:44px; padding:5px; border:1px solid var(--line); background:#fff8ea; color:var(--ink); }
+.gateway { background:linear-gradient(90deg,#fff3e0 23%,#fff3e0b5 49%,transparent 77%),url('./assets/sanctuary.webp') center 50%/cover,var(--paper); }
+@media(max-width:1260px) and (min-width:851px) { .dialogue { width:55%; } .sol-sprite { width:67%; } }
+@media(max-width:850px) {
+  .sidebar { border-inline-end:0; border-bottom:3px double var(--gold); }
+  .masthead { flex-wrap:wrap; }
+  #header-progress { order:4; margin:0; }
+}
+@media(max-width:620px) {
+  #header-progress { width:100%; padding:2px 0; flex-wrap:wrap; }
+  .preview-label { order:5; }
+  .sanctuary { min-height:0; }
+  .scene-art { opacity:.77; object-position:center top; }
+  .sol-sprite { inset:10px auto auto 0; width:82%; height:244px; }
+  .dialogue { width:100%; margin-top:222px; border-radius:24px 12px; }
+  .speaker h2 { font-size:2rem; }
+  .gateway { background:linear-gradient(90deg,#fff3e0 45%,#fff3e0aa 90%),url('./assets/sanctuary.webp') center/cover,var(--paper); }
+}
+.paper h2::before,.choices button::before { content:'✧' / ''; }
+@media(min-width:851px) {
+  .scene-art { opacity:.86; }
+  .sol-sprite { left:-16%; width:83%; }
+}

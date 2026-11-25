@@ -18,7 +18,7 @@ export function dialogue(character) {
     <img class="sol-sprite" src="./assets/sol.webp" alt="Sol, a fox-featured humanoid with dark plum hair" data-art>
     <div class="scene-heading"><span aria-hidden="true">✧</span> Twilight Sanctuary</div>
     <div class="dialogue">
-      <div class="speaker"><h2>Sol</h2><span>Scripted companion</span></div>
+      <div class="speaker"><h2>Sol</h2><span>Garden companion · Scripted companion</span></div>
       <p id="sol-line" aria-live="polite">${escape(character.greeting)}</p>
       <div id="sol-action"></div>
       <div class="choices" aria-label="Dialogue choices">
@@ -26,8 +26,8 @@ export function dialogue(character) {
       </div>
       <form id="custom-reply">
         <label for="reply">Custom reply</label>
-        <div class="reply-row"><input id="reply" name="reply" maxlength="500" required placeholder="Write something to Sol"><button>Keep draft</button></div>
-        <p id="reply-status" class="quiet" role="status"></p>
+        <div class="reply-row"><input id="reply" name="reply" maxlength="500" required placeholder="Write a reply"><button>Keep draft</button></div>
+        <p class="quiet">Live replies unavailable.</p><p id="reply-status" class="quiet" role="status"></p>
       </form>
     </div>
   </section>`;

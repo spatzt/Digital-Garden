@@ -10,7 +10,7 @@ const routes = [
 ];
 const dailyLinks = [['check-in','Check-In'],['journal','Daily Journal'],['calendar','Calendar']];
 const vaultLinks = [['records','Records'],['companions','Companion Vault']];
-const moods = ['Grounded','Calm','Focused','Creative','Tired'];
+const gauges = ['Stamina','Constitution','Willpower','Mood','Money Clarity'];
 const root = document.querySelector('main');
 let picked = null;
 let draft = '';
@@ -43,8 +43,7 @@ function progression() {
 
 function checkInPreview() {
   const mood = service.getCheckIn();
-  return panel('Today’s Check-In', `<p>${mood ? 'Sample check-in: '+escape(mood) : 'How are you arriving today?'}</p>
-    <div class="moods">${moods.map((label,index)=>`<span data-mood="${index}">${label}</span>`).join('')}</div>
+  return panel('Today’s Check-In', `<dl class="gauge-strip">${gauges.map(label=>`<div><dt>${label}</dt><dd>${mood?.[label] ?? '—'}</dd></div>`).join('')}</dl>
     ${link('check-in',mood ? 'Review check-in' : 'Open check-in','button filled')}`);
 }
 
@@ -56,7 +55,7 @@ function daily() {
     <div class="side-panels">${checkInPreview()}${panel('Active Quests',questList()+link('quests','View quests','text-link'))}</div>
     ${panel('Garden Calendar',calendar(service.listJournals(),sample.getUTCFullYear(),sample.getUTCMonth(),false,service.sampleDate)+link('calendar','Open calendar','text-link'),'calendar-panel')}
     ${panel('EchoField',`<p>A gateway from the sanctuary to the wider world.</p>${link('echofield','Open EchoField','button')}`,'gateway')}
-    ${panel('Player Progression',progression()+link('player','Open player profile','text-link'),'player-panel')}
+    ${panel('At a Glance',progression()+link('player','Open player profile','text-link'),'player-panel')}
   </div>`;
 }
 
@@ -76,13 +75,16 @@ function journal(date) {
 }
 function checkIn() {
   return pageView('Check-In', `<form id="check-in">
-    <fieldset><legend>How are you arriving?</legend><div class="moods form-moods">${moods.map((mood,index)=>`<label data-mood="${index}"><input name="mood" type="radio" value="${mood}" ${service.getCheckIn()===mood?'checked':''} required> ${mood}</label>`).join('')}</div></fieldset>
+    <fieldset><legend>Rate any gauge from 1 to 10</legend><div class="gauge-fields">${gauges.map(label=>`<label>${label}<input name="${label}" type="number" min="1" max="10" step="1" value="${service.getCheckIn()?.[label] ?? ''}"></label>`).join('')}</div></fieldset>
     <button class="filled">Save sample check-in</button><p id="check-in-status" role="status"></p>
   </form>`);
 }
 function render(moveFocus = false) {
   const {page,date} = resolveRoute(location.hash);
   navigation(page);
+  document.body.dataset.page = page;
+  const {level,xp,nextLevelXp,gald}=service.getProgression();
+  document.querySelector('#header-progress').innerHTML = `<span>Level ${level}</span><progress aria-label="Sample XP" value="${xp}" max="${nextLevelXp}"></progress><span>${xp} / ${nextLevelXp} XP</span><strong>${gald} Gald</strong>`;
   const views = {
     daily,
     'check-in':checkIn,
@@ -141,8 +143,13 @@ root.addEventListener('submit',event=>{
     draft=String(data.get('reply'));
     document.querySelector('#reply-status').textContent='Draft kept for this tab. Live replies are unavailable.';
   }
-  if (event.target.id==='check-in' && moods.includes(data.get('mood'))) {
-    service.saveCheckIn(data.get('mood'));
+  if (event.target.id==='check-in') {
+    const ratings = Object.fromEntries(gauges.flatMap(label=>data.get(label) ? [[label,Number(data.get(label))]] : []));
+    if (!Object.keys(ratings).length) {
+      document.querySelector('#check-in-status').textContent='Enter at least one rating.';
+      return;
+    }
+    service.saveCheckIn(ratings);
     document.querySelector('#check-in-status').textContent='Sample check-in saved for this tab.';
   }
 });

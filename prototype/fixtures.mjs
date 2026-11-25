@@ -12,7 +12,7 @@ export const quests = [
   {name:'Rest and recharge',completed:4,total:5}
 ];
 /** @type {import('./contracts.mjs').Progression} */
-export const progression = {xp:120,nextLevelXp:200,gald:24};
+export const progression = {level:1,xp:120,nextLevelXp:200,gald:24};
 
 export const sol = {
   greeting:'Welcome home. We can check in, pick up a quest, or take a quiet moment here.',
